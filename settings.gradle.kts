@@ -19,8 +19,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "RuniqueClone"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+rootProject.name = "RuniqueClone"
 include(":app")
 include(":auth:data")
 include(":auth:domain")
