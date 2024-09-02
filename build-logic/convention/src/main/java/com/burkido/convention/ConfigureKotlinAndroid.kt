@@ -19,18 +19,19 @@ internal fun Project.configureKotlinAndroid(
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
         }
-        configureKotlin()
+    }
 
-        dependencies {
-            "coreLibraryDesugaring"(libs.findLibrary("desugar.jdk.libs").get())
-        }
+    configureKotlin()
+
+    dependencies {
+        "coreLibraryDesugaring"(libs.findLibrary("desugar.jdk.libs").get())
     }
 }
 
 private fun Project.configureKotlin() {
     tasks.withType<KotlinCompile>().configureEach {
         kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_11.toString()
+            jvmTarget = JavaVersion.VERSION_17.toString()
         }
     }
 }

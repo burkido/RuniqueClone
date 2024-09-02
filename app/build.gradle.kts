@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.runiqueclone.android.application.compose)
+    alias(libs.plugins.mapsplatform.secrets.plugin)
 }
 
 android {
@@ -13,12 +13,6 @@ android {
         }
     }
 
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -27,7 +21,6 @@ android {
 }
 
 dependencies {
-
     // Coil
     implementation(libs.coil.compose)
 
@@ -49,7 +42,14 @@ dependencies {
     // Crypto
     implementation(libs.androidx.security.crypto.ktx)
 
-    //implementation(libs.bundles.koin)
+    api(libs.core)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     // Location
     implementation(libs.google.android.gms.play.services.location)
@@ -60,12 +60,19 @@ dependencies {
     // Timber
     implementation(libs.timber)
 
-    api(libs.core)
+    implementation(projects.core.presentation.designsystem)
+    implementation(projects.core.presentation.ui)
+    implementation(projects.core.domain)
+    implementation(projects.core.data)
+    implementation(projects.core.database)
 
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    implementation(projects.auth.presentation)
+    implementation(projects.auth.domain)
+    implementation(projects.auth.data)
+
+    implementation(projects.run.presentation)
+    implementation(projects.run.domain)
+    implementation(projects.run.data)
+    implementation(projects.run.location)
+    implementation(projects.run.network)
 }
