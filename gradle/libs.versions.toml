@@ -125,6 +125,7 @@ runiqueclone-android-library = { id = "runiqueclone.android.library", version = 
 runiqueclone-android-library-compose = { id = "runiqueclone.android.library.compose", version = "unspecified" }
 runiqueclone-android-feature-ui = { id = "runiqueclone.android.feature.ui", version = "unspecified" }
 runiqueclone-android-room = { id = "runiqueclone.android.room", version = "unspecified" }
+runiqueclone-jvm-library = { id = "runiqueclone.jvm.library", version = "unspecified" }
 
 [bundles]
 compose = [
