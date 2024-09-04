@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.runiqueclone.android.library)
+    alias(libs.plugins.runiqueclone.jvm.ktor)
 }
 
 android {
