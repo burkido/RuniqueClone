@@ -5,13 +5,19 @@ package com.burkido.core.domain
 
 sealed interface DataError : Error {
 
-    enum class NetworkError : DataError {
+    enum class Network : DataError {
         NO_INTERNET_CONNECTION,
         TIMEOUT,
+        REQUEST_TIMEOUT,
+        CONFLICT,
+        PAYLOAD_TOO_LARGE,
+        TOO_MANY_REQUESTS,
+        SERVER_ERROR,
+        SERIALIZATION,
         UNKNOWN
     }
 
-    enum class LocalError : DataError {
+    enum class Local : DataError {
         DISK_FULL,
     }
 
