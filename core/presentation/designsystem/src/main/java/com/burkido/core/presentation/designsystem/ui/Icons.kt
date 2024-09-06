@@ -1,8 +1,9 @@
-package com.burkido.core.presentation.designsystem
+package com.burkido.core.presentation.designsystem.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import com.burkido.core.presentation.designsystem.R
 
 val AnalyticsIcon: ImageVector
     @Composable

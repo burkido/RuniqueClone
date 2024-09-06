@@ -1,4 +1,4 @@
-package com.burkido.core.presentation.designsystem
+package com.burkido.core.presentation.designsystem.ui
 
 import androidx.compose.ui.graphics.Color
 

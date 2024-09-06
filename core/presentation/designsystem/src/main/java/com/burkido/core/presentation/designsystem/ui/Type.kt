@@ -1,4 +1,4 @@
-package com.burkido.core.presentation.designsystem
+package com.burkido.core.presentation.designsystem.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,6 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.burkido.core.presentation.designsystem.R
 
 val Poppins = FontFamily(
     Font(

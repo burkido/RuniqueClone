@@ -1,4 +1,4 @@
-package com.burkido.core.presentation.designsystem
+package com.burkido.core.presentation.designsystem.ui
 
 import android.app.Activity
 import androidx.compose.material3.MaterialTheme
