@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.burkido.run.network"
+    namespace = "com.burkido.run.location"
 }
 
 dependencies {
