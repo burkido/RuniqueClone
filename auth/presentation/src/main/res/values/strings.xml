@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_account">New Account</string>
+    <string name="login">Login</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="example_email">example@mail.com</string>
+    <string name="email">E-mail</string>
+    <string name="must_be_a_valid_email">Must be a valid email</string>
+    <string name="password">Password</string>
+    <string name="at_least_x_characters">At least %d characters</string>
+    <string name="at_least_one_number">At least one number</string>
+    <string name="contains_lowercase_char">Password contains lowercase character</string>
+    <string name="contains_uppercase_char">Password contains uppercase character</string>
+    <string name="register">Register</string>
+</resources>
