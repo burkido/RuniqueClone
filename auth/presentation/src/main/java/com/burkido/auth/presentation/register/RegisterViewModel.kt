@@ -9,16 +9,26 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.burkido.auth.domain.AuthRepository
 import com.burkido.auth.domain.UserDataValidator
+import com.burkido.core.domain.Result
+import com.burkido.core.presentation.ui.asUiText
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val userDataValidator: UserDataValidator
+    private val userDataValidator: UserDataValidator,
+    private val authRepository: AuthRepository
 ) : ViewModel() {
 
     var state by mutableStateOf(RegisterState())
         private set
+
+    private val eventChannel = Channel<RegisterEvent>()
+    val events = eventChannel.receiveAsFlow()
 
     init {
         state.email.textAsFlow()
@@ -45,7 +55,37 @@ class RegisterViewModel(
 
 
     fun onAction(action: RegisterAction) {
+        when (action) {
+            RegisterAction.OnRegisterClick -> register()
+            RegisterAction.OnTogglePasswordVisibilityClick -> togglePasswordVisibility()
+            else -> Unit
+        }
+    }
 
+
+    private fun register() {
+        viewModelScope.launch {
+            state = state.copy(isRegistering = true)
+            val result = authRepository.register(
+                state.email.text.toString().trim(),
+                state.password.text.toString().trim()
+            )
+            state = state.copy(isRegistering = false)
+
+            when (result) {
+                is Result.Success -> {
+                    eventChannel.send(RegisterEvent.RegistrationCompleted)
+                }
+
+                is Result.Failure -> {
+                    eventChannel.send(RegisterEvent.Error(result.error.asUiText()))
+                }
+            }
+        }
+    }
+
+    private fun togglePasswordVisibility() {
+        state = state.copy(isPasswordVisible = !state.isPasswordVisible)
     }
 
 }
