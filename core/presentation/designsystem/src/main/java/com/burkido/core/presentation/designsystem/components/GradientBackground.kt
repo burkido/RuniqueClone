@@ -52,7 +52,7 @@ fun GradientBackground(
                 .fillMaxSize()
                 .then(
                     if (isAtLeastAndroid12) {
-                        Modifier.blur(smallDimension / 3f)
+                        Modifier.blur(smallDimension / 4f)
                     } else Modifier
                 )
                 .background(
