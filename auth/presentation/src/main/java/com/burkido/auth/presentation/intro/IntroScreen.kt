@@ -1,4 +1,4 @@
-package com.burkido.auth.presentation
+package com.burkido.auth.presentation.intro
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
