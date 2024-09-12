@@ -22,4 +22,5 @@
     <string name="runique_description">Track your runs, set goals and achieve fitness milestones with our intuitive app.</string>
     <string name="sign_in">Sign In</string>
     <string name="runique">RuniqueClone</string>
+    <string name="error_email_password_incorrect">Incorrect email or password</string>
 </resources>
