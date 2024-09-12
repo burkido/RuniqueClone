@@ -1,4 +1,4 @@
-package com.burkido.auth.data
+package com.burkido.auth.data.request
 
 import kotlinx.serialization.Serializable
 

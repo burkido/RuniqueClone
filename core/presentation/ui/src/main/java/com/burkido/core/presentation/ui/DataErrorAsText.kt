@@ -1,6 +1,6 @@
 package com.burkido.core.presentation.ui
 
-import com.burkido.core.domain.DataError
+import com.burkido.core.domain.result.DataError
 
 fun DataError.asUiText(): UiText = when (this) {
     DataError.Network.NO_INTERNET_CONNECTION -> UiText.StringResource(id = R.string.error_no_internet)

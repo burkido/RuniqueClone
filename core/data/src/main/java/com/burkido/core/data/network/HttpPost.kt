@@ -1,7 +1,7 @@
 package com.burkido.core.data.network
 
-import com.burkido.core.domain.DataError
-import com.burkido.core.domain.Result
+import com.burkido.core.domain.result.DataError
+import com.burkido.core.domain.result.Result
 import io.ktor.client.HttpClient
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody

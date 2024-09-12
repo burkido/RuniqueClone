@@ -1,8 +1,8 @@
 package com.burkido.core.data.network
 
 import com.burkido.core.data.BuildConfig
-import com.burkido.core.domain.DataError
-import com.burkido.core.domain.Result
+import com.burkido.core.domain.result.DataError
+import com.burkido.core.domain.result.Result
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import kotlinx.coroutines.CancellationException
