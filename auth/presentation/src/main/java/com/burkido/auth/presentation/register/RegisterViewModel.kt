@@ -20,8 +20,8 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class RegisterViewModel(
-    private val userDataValidator: UserDataValidator,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val userDataValidator: UserDataValidator
 ) : ViewModel() {
 
     var state by mutableStateOf(RegisterState())
