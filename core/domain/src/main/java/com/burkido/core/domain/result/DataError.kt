@@ -6,6 +6,7 @@ package com.burkido.core.domain.result
 sealed interface DataError : Error {
 
     enum class Network : DataError {
+        UNAUTHORIZED,
         NO_INTERNET_CONNECTION,
         TIMEOUT,
         REQUEST_TIMEOUT,

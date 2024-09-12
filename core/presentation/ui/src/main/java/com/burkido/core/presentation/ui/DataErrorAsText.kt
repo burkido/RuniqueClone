@@ -3,6 +3,7 @@ package com.burkido.core.presentation.ui
 import com.burkido.core.domain.result.DataError
 
 fun DataError.asUiText(): UiText = when (this) {
+    DataError.Network.UNAUTHORIZED -> UiText.StringResource(id = R.string.error_unauthorized)
     DataError.Network.NO_INTERNET_CONNECTION -> UiText.StringResource(id = R.string.error_no_internet)
     DataError.Network.TIMEOUT -> UiText.StringResource(id = R.string.error_request_timeout)
     DataError.Network.REQUEST_TIMEOUT -> UiText.StringResource(id = R.string.error_request_timeout)
