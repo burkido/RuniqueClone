@@ -23,9 +23,10 @@ suspend inline fun <reified T> safeApiCall(execute: () -> HttpResponse): Result<
     }
 }
 
-suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Network> =
-    when (response.status.value) {
+suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<T, DataError.Network> {
+    return when(response.status.value) {
         in 200..299 -> Result.Success(response.body<T>())
+        401 -> Result.Failure(DataError.Network.UNAUTHORIZED)
         408 -> Result.Failure(DataError.Network.REQUEST_TIMEOUT)
         409 -> Result.Failure(DataError.Network.CONFLICT)
         413 -> Result.Failure(DataError.Network.PAYLOAD_TOO_LARGE)
@@ -33,5 +34,6 @@ suspend inline fun <reified T> responseToResult(response: HttpResponse): Result<
         in 500..599 -> Result.Failure(DataError.Network.SERVER_ERROR)
         else -> Result.Failure(DataError.Network.UNKNOWN)
     }
+}
 
 fun constructRoute(route: String): String = BuildConfig.BASE_URL + route
