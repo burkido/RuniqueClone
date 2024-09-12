@@ -11,7 +11,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burkido.auth.domain.AuthRepository
 import com.burkido.auth.domain.UserDataValidator
+import com.burkido.auth.presentation.R
+import com.burkido.core.domain.result.DataError
 import com.burkido.core.domain.result.Result
+import com.burkido.core.presentation.ui.UiText
 import com.burkido.core.presentation.ui.asUiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.combine
@@ -35,7 +38,8 @@ class LoginViewModel(
             state.email.textAsFlow(),
             state.password.textAsFlow()
         ) { email, password ->
-            val canLogin = userDataValidator.isValidEmail(email.toString().trim()) && password.isNotEmpty()
+            val canLogin =
+                userDataValidator.isValidEmail(email.toString().trim()) && password.isNotEmpty()
             state = state.copy(canLogin = canLogin)
         }.launchIn(viewModelScope)
     }
@@ -58,7 +62,17 @@ class LoginViewModel(
             state = state.copy(isLoggingIn = false)
             when (result) {
                 is Result.Success -> _events.send(LoginEvent.LoginSuccess)
-                is Result.Failure -> _events.send(LoginEvent.Error(result.error.asUiText()))
+                is Result.Failure -> {
+                    if (result.error == DataError.Network.UNAUTHORIZED) {
+                        _events.send(
+                            LoginEvent.Error(
+                                UiText.StringResource(R.string.error_email_password_incorrect)
+                            )
+                        )
+                    } else {
+                        _events.send(LoginEvent.Error(result.error.asUiText()))
+                    }
+                }
             }
         }
     }
