@@ -78,7 +78,6 @@ fun LoginScreenRoot(
                 LoginAction.OnSignUpClick -> onSignUpClick()
                 else -> viewModel.onAction(action)
             }
-            viewModel.onAction(action)
         }
     )
 }
