@@ -3,7 +3,7 @@ package com.burkido.runiqueclone.di
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.burkido.core.data.auth.EncryptedSessionStorage
+import com.burkido.runiqueclone.MainViewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
