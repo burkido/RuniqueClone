@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.burkido.auth.domain.AuthRepository
 import com.burkido.auth.domain.UserDataValidator
-import com.burkido.core.domain.Result
+import com.burkido.core.domain.result.Result
 import com.burkido.core.presentation.ui.asUiText
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
