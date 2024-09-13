@@ -4,6 +4,7 @@ import android.app.Application
 import com.burkido.auth.data.di.authDataModule
 import com.burkido.auth.di.authViewModelModule
 import com.burkido.core.data.di.coreDataModule
+import com.burkido.run.di.runOverviewViewModelModule
 import com.burkido.runiqueclone.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -26,6 +27,7 @@ class RuniqueCloneApplication : Application() {
                 authDataModule,
                 authViewModelModule,
                 coreDataModule,
+                runOverviewViewModelModule,
                 appModule
             )
         }
