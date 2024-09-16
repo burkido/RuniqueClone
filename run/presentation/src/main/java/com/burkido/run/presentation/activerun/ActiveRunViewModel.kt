@@ -17,8 +17,40 @@ class ActiveRunViewModel(
     private val _events = Channel<ActiveRunEvent>()
     val events = _events.receiveAsFlow()
 
-    fun onAction(activeRunAction: ActiveRunAction) {
-        TODO("Not yet implemented")
+    fun onAction(action: ActiveRunAction) {
+        when (action) {
+            ActiveRunAction.DismissRationaleDialog -> {
+                dismissRationaleDialog()
+            }
+            ActiveRunAction.OnBackClick -> TODO()
+            ActiveRunAction.OnFinishRunClick -> TODO()
+            ActiveRunAction.OnResumeRunClick -> TODO()
+            ActiveRunAction.OnToggleRunClick -> {
+
+            }
+            is ActiveRunAction.SubmitLocationPermissionInfo -> {
+                submitLocationPermissionInfo(action.showLocationRationale)
+            }
+
+            is ActiveRunAction.SubmitNotificationPermissionInfo -> {
+                submitNotificationPermissionInfo(action.showNotificationPermissionRationale)
+            }
+        }
+    }
+
+    private fun dismissRationaleDialog() {
+        state = state.copy(
+            showNotificationRationale = false,
+            showLocationRationale = false
+        )
+    }
+
+    private fun submitLocationPermissionInfo(showLocationRationale: Boolean) {
+        state = state.copy(showLocationRationale = showLocationRationale)
+    }
+
+    private fun submitNotificationPermissionInfo(showNotificationRationale: Boolean) {
+        state = state.copy(showNotificationRationale = showNotificationRationale)
     }
 
 }
