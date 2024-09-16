@@ -65,7 +65,7 @@ private fun ActiveRunScreen(
             permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
         val hasNotificationPermission =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                permissions[Manifest.permission.ACCESS_BACKGROUND_LOCATION] == true
+                permissions[Manifest.permission.POST_NOTIFICATIONS] == true
             } else {
                 true
             }
