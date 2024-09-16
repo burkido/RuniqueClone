@@ -1,6 +1,5 @@
 package com.burkido.runiqueclone
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -10,6 +9,8 @@ import androidx.navigation.compose.navigation
 import com.burkido.auth.presentation.intro.IntroScreenRoot
 import com.burkido.auth.presentation.login.LoginScreenRoot
 import com.burkido.auth.presentation.register.RegisterScreenRoot
+import com.burkido.run.presentation.activerun.ActiveRunScreenRoot
+import com.burkido.run.presentation.runoverview.RunOverviewScreenRoot
 
 @Composable
 fun NavigationRoot(
@@ -40,14 +41,23 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             RegisterScreenRoot(
                 onSignInClick = {
                     navController.navigate("login") {
-                        popUpTo("register")  {
+                        popUpTo("register") {
                             inclusive = true
                             saveState = true
                         }
                         restoreState = true
                     }
                 },
-                onRegisteredSuccessfully = { navController.navigate("login") }
+                // TODO: handle login navigation in separate file
+                onRegisteredSuccessfully = {
+                    navController.navigate("login") {
+                        popUpTo("register") {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
             )
         }
         composable("login") {
@@ -79,7 +89,14 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = "run"
     ) {
         composable("run_overview") {
-            Text(text = "Runke")
+            RunOverviewScreenRoot(
+                onStartRunClick = {
+                    navController.navigate("active_run")
+                }
+            )
+        }
+        composable("active_run") {
+            ActiveRunScreenRoot()
         }
     }
 }
