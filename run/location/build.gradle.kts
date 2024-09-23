@@ -1,4 +1,5 @@
 plugins {
+
     alias(libs.plugins.runiqueclone.android.library)
 }
 
@@ -7,6 +8,10 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.google.android.gms.play.services.location)
+    implementation(libs.bundles.koin)
+
     implementation(projects.core.domain)
-    implementation(projects.core.data)
+    implementation(projects.run.domain)
 }
