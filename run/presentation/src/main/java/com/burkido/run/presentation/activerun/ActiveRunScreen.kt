@@ -34,6 +34,7 @@ import com.burkido.core.presentation.designsystem.ui.StopIcon
 import com.burkido.core.presentation.designsystem.ui.spacing
 import com.burkido.run.presentation.R
 import com.burkido.run.presentation.activerun.components.RunDataCard
+import com.burkido.run.presentation.activerun.maps.TrackerMap
 import com.burkido.run.presentation.permissions.hasLocationPermission
 import com.burkido.run.presentation.permissions.hasNotificationPermission
 import com.burkido.run.presentation.permissions.shouldShowLocationPermissionRationale
@@ -59,10 +60,8 @@ private fun ActiveRunScreen(
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val hasCoarseLocationPermission =
-            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
-        val hasFineLocationPermission =
-            permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
+        val hasCoarseLocationPermission = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        val hasFineLocationPermission = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
         val hasNotificationPermission =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 permissions[Manifest.permission.POST_NOTIFICATIONS] == true
@@ -148,6 +147,16 @@ private fun ActiveRunScreen(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.surface)
         ) {
+            TrackerMap(
+                locations = state.runData.locations,
+                currentLocation = state.currentLocation,
+                isRunFinished = state.isRunFinished,
+                onSnapshot = {},
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding)
+                    .padding(MaterialTheme.spacing.medium)
+            )
             RunDataCard(
                 elapsedTime = state.elapsedTime,
                 runData = state.runData,
