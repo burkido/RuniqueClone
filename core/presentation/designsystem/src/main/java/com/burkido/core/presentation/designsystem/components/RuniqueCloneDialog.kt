@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,9 +26,9 @@ fun RuniqueCloneDialog(
     title: String,
     onDismiss: () -> Unit,
     description: String,
-    primaryButton: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    secondaryButton: @Composable () -> Unit = {}
+    primaryButton: @Composable RowScope.() -> Unit,
+    secondaryButton: @Composable RowScope.() -> Unit = {}
 ) {
     Dialog(onDismissRequest = onDismiss) {
         Column(
