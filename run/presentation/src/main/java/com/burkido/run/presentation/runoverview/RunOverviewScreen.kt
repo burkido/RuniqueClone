@@ -21,6 +21,7 @@ import com.burkido.core.presentation.designsystem.ui.AnalyticsIcon
 import com.burkido.core.presentation.designsystem.ui.LogoIcon
 import com.burkido.core.presentation.designsystem.ui.LogoutIcon
 import com.burkido.core.presentation.designsystem.ui.RunIcon
+import com.burkido.core.presentation.designsystem.ui.RuniqueCloneTheme
 import com.burkido.run.presentation.R
 import org.koin.androidx.compose.koinViewModel
 
@@ -95,7 +96,9 @@ private fun RunOverviewScreen(
 @Preview
 @Composable
 fun RunOverviewScreenPreview() {
-    RunOverviewScreen(
-        onAction = {}
-    )
+    RuniqueCloneTheme {
+        RunOverviewScreen(
+            onAction = {}
+        )
+    }
 }
