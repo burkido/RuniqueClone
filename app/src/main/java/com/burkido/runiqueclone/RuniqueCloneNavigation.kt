@@ -1,15 +1,18 @@
 package com.burkido.runiqueclone
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
+import androidx.navigation.navDeepLink
 import com.burkido.auth.presentation.intro.IntroScreenRoot
 import com.burkido.auth.presentation.login.LoginScreenRoot
 import com.burkido.auth.presentation.register.RegisterScreenRoot
 import com.burkido.run.presentation.activerun.ActiveRunScreenRoot
+import com.burkido.run.presentation.activerun.service.ActiveRunService
 import com.burkido.run.presentation.runoverview.RunOverviewScreenRoot
 
 @Composable
@@ -95,8 +98,28 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
                 }
             )
         }
-        composable("active_run") {
-            ActiveRunScreenRoot()
+        composable(
+            route = "active_run",
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "runiqueclone://active_run"
+                }
+            )
+        ) {
+            val context = LocalContext.current
+            ActiveRunScreenRoot(
+                onServiceToggle = { shouldServiceRun ->
+                    if (shouldServiceRun) {
+                        context.startService(
+                            ActiveRunService.createStartIntent(context, MainActivity::class.java)
+                        )
+                    } else {
+                        context.stopService(
+                            ActiveRunService.stopIntent(context)
+                        )
+                    }
+                }
+            )
         }
     }
 }

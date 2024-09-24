@@ -36,6 +36,7 @@ import com.burkido.core.presentation.designsystem.ui.spacing
 import com.burkido.run.presentation.R
 import com.burkido.run.presentation.activerun.components.RunDataCard
 import com.burkido.run.presentation.activerun.maps.TrackerMap
+import com.burkido.run.presentation.activerun.service.ActiveRunService
 import com.burkido.run.presentation.permissions.hasLocationPermission
 import com.burkido.run.presentation.permissions.hasNotificationPermission
 import com.burkido.run.presentation.permissions.shouldShowLocationPermissionRationale
@@ -44,10 +45,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ActiveRunScreenRoot(
-    viewModel: ActiveRunViewModel = koinViewModel(),
+    onServiceToggle: (Boolean) -> Unit,
+    viewModel: ActiveRunViewModel = koinViewModel()
 ) {
     ActiveRunScreen(
         state = viewModel.state,
+        onServiceToggle = onServiceToggle,
         onAction = viewModel::onAction
     )
 }
@@ -55,14 +58,17 @@ fun ActiveRunScreenRoot(
 @Composable
 private fun ActiveRunScreen(
     state: ActiveRunState,
+    onServiceToggle: (Boolean) -> Unit,
     onAction: (ActiveRunAction) -> Unit
 ) {
     val context = LocalContext.current
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
-        val hasCoarseLocationPermission = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
-        val hasFineLocationPermission = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
+        val hasCoarseLocationPermission =
+            permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        val hasFineLocationPermission =
+            permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true
         val hasNotificationPermission =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 permissions[Manifest.permission.POST_NOTIFICATIONS] == true
@@ -110,6 +116,18 @@ private fun ActiveRunScreen(
 
         if (!showLocationRationale && !showNotificationRationale) {
             permissionLauncher.requestRuniqueClonePermissions(context)
+        }
+    }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if (state.isRunFinished) {
+            onServiceToggle(false)
+        }
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if (context.hasLocationPermission() && state.shouldTrack && !ActiveRunService.isServiceActive) {
+            onServiceToggle(true)
         }
     }
 
@@ -207,9 +225,11 @@ private fun ActiveRunScreen(
                 state.showLocationRationale && state.showNotificationRationale -> {
                     stringResource(id = R.string.location_notification_rationale)
                 }
+
                 state.showLocationRationale -> {
                     stringResource(id = R.string.location_rationale)
                 }
+
                 else -> {
                     stringResource(id = R.string.notification_rationale)
                 }
@@ -263,6 +283,7 @@ private fun ActiveRunScreenPreview() {
     RuniqueCloneTheme {
         ActiveRunScreen(
             state = ActiveRunState(),
+            onServiceToggle = {},
             onAction = {}
         )
     }
