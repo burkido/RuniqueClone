@@ -4,6 +4,7 @@ import android.app.Application
 import com.burkido.auth.data.di.authDataModule
 import com.burkido.auth.di.authViewModelModule
 import com.burkido.core.data.di.coreDataModule
+import com.burkido.database.di.databaseModule
 import com.burkido.run.di.runPresentationModule
 import com.burkido.runiqueclone.di.appModule
 import kotlinx.coroutines.CoroutineScope
@@ -32,7 +33,8 @@ class RuniqueCloneApplication : Application() {
                 authViewModelModule,
                 coreDataModule,
                 runPresentationModule,
-                appModule
+                appModule,
+                databaseModule
             )
         }
     }
